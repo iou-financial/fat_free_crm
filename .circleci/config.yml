@@ -1,0 +1,37 @@
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.1.3
+  node: circleci/node@5.1.0
+  nullstone: nullstone/nullstone@1
+
+jobs:
+  build-and-deploy-app:
+    machine:
+      image: ubuntu-2004:current
+      docker_layer_caching: true    # default - false
+    environment:
+      NULLSTONE_ORG: $NULLSTONE_ORG
+      NULLSTONE_APP: $NULLSTONE_CRM_APP
+    parameters:
+      env:
+        description: "Deployment for fat free crm app in target env"
+        type: string
+    steps:
+      - checkout
+      - nullstone/install
+      - run: docker build -t iou-crm . -f Dockerfile
+      - run: nullstone push --source=iou-crm --env=<< parameters.env >>
+      - run: nullstone deploy--env=<< parameters.env >>
+
+workflows:
+  version: 2
+  ci-build:
+    jobs:
+      - build-and-deploy-app:
+          context:
+            - nullstone
+          env: staging
+          filters:
+            branches:
+              only: master
