@@ -18,4 +18,6 @@ WORKDIR /rails
 
 COPY . .
 RUN gem install bundler:2.4.10
+RUN bundle lock --add-platform x86_64-linux-musl
+
 RUN bundle install
