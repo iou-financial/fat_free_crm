@@ -16,6 +16,8 @@ RUN chmod +x ./entrypoint.sh
 WORKDIR /rails
 
 COPY Gemfile* ./
+COPY fat_free_crm.* ./
+
 RUN gem install bundler
 RUN bundle install
 
