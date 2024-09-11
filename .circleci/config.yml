@@ -18,8 +18,8 @@ jobs:
       - checkout
       - nullstone/install
       - run: docker build -t iou-crm . -f Dockerfile
-      - run: nullstone push --org=$NULLSTONE_ORG --app=$NULLSTONE_CRM_APP --source=iou-crm --env=<< parameters.env >>
-      - run: nullstone deploy --org=$NULLSTONE_ORG --app=$NULLSTONE_CRM_APP --env=<< parameters.env >>
+      - run: nullstone push --app=${NULLSTONE_CRM_APP} --source=iou-crm --env=<< parameters.env >>
+      - run: nullstone deploy --app=${NULLSTONE_CRM_APP} --env=<< parameters.env >>
 
 workflows:
   version: 2
