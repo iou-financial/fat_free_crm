@@ -7,7 +7,8 @@ FROM nullstone/rails:ruby3.3-webapp
 
 RUN apk add --no-cache --update \
 	imagemagick \
-  tzdata
+  tzdata \
+  git
 
 WORKDIR /
 COPY entrypoint.sh .
