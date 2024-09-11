@@ -5,19 +5,18 @@
 # docker-compose exec web bundle exec rake db:create db:schema:load ffcrm:demo:load
 FROM nullstone/rails:ruby3.3-webapp
 
-RUN apt-get update && \
-	apt-get install -y imagemagick tzdata && \
-	apt-get autoremove -y
+RUN apk add --no-cache --update \
+	imagemagick \
+  tzdata
 
 WORKDIR /
 COPY entrypoint.sh .
 RUN chmod +x ./entrypoint.sh
 
-WORKDIR /app
+WORKDIR /rails
 
 COPY Gemfile* ./
-RUN gem install bundler && \
-	bundle config set --local deployment 'true' && \
-	bundle install --deployment
+RUN gem install bundler
+RUN bundle install
 
 COPY . .
