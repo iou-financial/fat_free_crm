@@ -10,9 +10,6 @@ jobs:
     machine:
       image: ubuntu-2004:current
       docker_layer_caching: true    # default - false
-    environment:
-      NULLSTONE_ORG: $NULLSTONE_ORG
-      NULLSTONE_APP: $NULLSTONE_CRM_APP
     parameters:
       env:
         description: "Deployment for fat free crm app in target env"
@@ -21,8 +18,8 @@ jobs:
       - checkout
       - nullstone/install
       - run: docker build -t iou-crm . -f Dockerfile
-      - run: nullstone push --source=iou-crm --env=<< parameters.env >>
-      - run: nullstone deploy--env=<< parameters.env >>
+      - run: nullstone push --org=$NULLSTONE_ORG --app=$NULLSTONE_CRM_APP --source=iou-crm --env=<< parameters.env >>
+      - run: nullstone deploy --org=$NULLSTONE_ORG --app=$NULLSTONE_CRM_APP --env=<< parameters.env >>
 
 workflows:
   version: 2
