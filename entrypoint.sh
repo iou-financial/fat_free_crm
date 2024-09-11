@@ -13,8 +13,9 @@ if [ -n "${POSTGRES_URL}" ]; then
   export DATABASE_URL="${POSTGRES_URL}"
 fi
 
-echo "Running migrations..."
-bundle exec rails db:migrate
+echo "loading schema..."
+bundle exec rails db:schema:load
+#bundle exec rails ffcrm:setup
 echo "Finished running migrations"
 
 echo "Precompile Assets on entrypoint"
