@@ -16,6 +16,5 @@ RUN chmod +x ./entrypoint.sh
 WORKDIR /rails
 
 COPY . .
-
-RUN gem install bundler
+RUN gem install bundler:2.4.10
 RUN bundle install
