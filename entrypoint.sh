@@ -14,6 +14,7 @@ if [ -n "${POSTGRES_URL}" ]; then
 fi
 
 echo "loading schema..."
+bundle exec rails db:environment:set RAILS_ENV="${RAILS_ENV}"
 bundle exec rails db:schema:load
 #bundle exec rails ffcrm:setup
 echo "Finished running migrations"
