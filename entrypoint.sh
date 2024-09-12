@@ -13,11 +13,11 @@ if [ -n "${POSTGRES_URL}" ]; then
   export DATABASE_URL="${POSTGRES_URL}"
 fi
 
-echo "loading schema..."
-bundle exec rails db:environment:set RAILS_ENV="${RAILS_ENV}"
-bundle exec rails db:schema:load
-#bundle exec rails ffcrm:setup
-echo "Finished running migrations"
+#echo "loading schema..."
+## bundle exec rails db:environment:set RAILS_ENV="${RAILS_ENV}"
+## bundle exec rails db:schema:load
+##bundle exec rails ffcrm:setup
+#echo "Finished running migrations"
 
 echo "Precompile Assets on entrypoint"
 SECRET_KEY_BASE=1 bundle exec rake assets:precompile
